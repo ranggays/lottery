@@ -1,0 +1,609 @@
+{
+  "address": "0x78f34d01206BAaFA2EC869696B003ac210422b0d",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "vrfCoordinatorV2",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "entranceFee",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "gasLane",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "subscriptionId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint32",
+          "name": "callbackGasLimit",
+          "type": "uint32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "interval",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "have",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "want",
+          "type": "address"
+        }
+      ],
+      "name": "OnlyCoordinatorCanFulfill",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "have",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "coordinator",
+          "type": "address"
+        }
+      ],
+      "name": "OnlyOwnerOrCoordinator",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Raffle__NotEnoughETHEntered",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Raffle__NotOpen",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Raffle__TransferFailed",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "currentBalance",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "numPlayers",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "raffleState",
+          "type": "uint256"
+        }
+      ],
+      "name": "Raffle__UpkeepNotNeeded",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ZeroAddress",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "vrfCoordinator",
+          "type": "address"
+        }
+      ],
+      "name": "CoordinatorSet",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferRequested",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "player",
+          "type": "address"
+        }
+      ],
+      "name": "RaffleEnter",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "requestId",
+          "type": "uint256"
+        }
+      ],
+      "name": "RequestedRaffleWinner",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "winner",
+          "type": "address"
+        }
+      ],
+      "name": "WinnerPicked",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "acceptOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "name": "checkUpkeep",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "upkeepNeeded",
+          "type": "bool"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "enterRaffle",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getEntranceFee",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getInterval",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getLatestTimeStamp",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getNumWords",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getNumberOfPlayers",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "getPlayer",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getRaffleState",
+      "outputs": [
+        {
+          "internalType": "enum Raffle.RaffleState",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getRecentWinner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getRequestConfirmations",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "name": "performUpkeep",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "requestId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "randomWords",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "rawFulfillRandomWords",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "s_vrfCoordinator",
+      "outputs": [
+        {
+          "internalType": "contract IVRFCoordinatorV2Plus",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_vrfCoordinator",
+          "type": "address"
+        }
+      ],
+      "name": "setCoordinator",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x4f6d0c98e12501ef40480f121621cba072eef90382473aeae19b46fe8606252a",
+  "receipt": {
+    "to": null,
+    "from": "0x9A9F76796555F720278daD8137064c4942940EB8",
+    "contractAddress": "0x78f34d01206BAaFA2EC869696B003ac210422b0d",
+    "transactionIndex": 42,
+    "gasUsed": "1841898",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x1fe8b3452b6bbe389b342880aaee13ddd5f8575937e35449057850b2fd82d12f",
+    "transactionHash": "0x4f6d0c98e12501ef40480f121621cba072eef90382473aeae19b46fe8606252a",
+    "logs": [],
+    "blockNumber": 10145632,
+    "cumulativeGasUsed": "16181002",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x9DdfaCa8183c41ad55329BdeeD9F6A8d53168B1B",
+    "10000000000000000",
+    "0x787d74caea10b2b357790d5b5247c2f63d1d91572a9846f780606e4d953677ae",
+    "24790059979994712882845837349149037420644765838823479314343953709567099181490",
+    "500000",
+    "30"
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "5955c68f089ca224e356c320fc4a64d5",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.28+commit.7893614a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"vrfCoordinatorV2\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"entranceFee\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"gasLane\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"subscriptionId\",\"type\":\"uint256\"},{\"internalType\":\"uint32\",\"name\":\"callbackGasLimit\",\"type\":\"uint32\"},{\"internalType\":\"uint256\",\"name\":\"interval\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"have\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"want\",\"type\":\"address\"}],\"name\":\"OnlyCoordinatorCanFulfill\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"have\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"coordinator\",\"type\":\"address\"}],\"name\":\"OnlyOwnerOrCoordinator\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Raffle__NotEnoughETHEntered\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Raffle__NotOpen\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Raffle__TransferFailed\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentBalance\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"numPlayers\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"raffleState\",\"type\":\"uint256\"}],\"name\":\"Raffle__UpkeepNotNeeded\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ZeroAddress\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"vrfCoordinator\",\"type\":\"address\"}],\"name\":\"CoordinatorSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"OwnershipTransferRequested\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"player\",\"type\":\"address\"}],\"name\":\"RaffleEnter\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"requestId\",\"type\":\"uint256\"}],\"name\":\"RequestedRaffleWinner\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"}],\"name\":\"WinnerPicked\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"acceptOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"checkUpkeep\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"upkeepNeeded\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"enterRaffle\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getEntranceFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getInterval\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLatestTimeStamp\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getNumWords\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getNumberOfPlayers\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"getPlayer\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getRaffleState\",\"outputs\":[{\"internalType\":\"enum Raffle.RaffleState\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getRecentWinner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getRequestConfirmations\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"performUpkeep\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"requestId\",\"type\":\"uint256\"},{\"internalType\":\"uint256[]\",\"name\":\"randomWords\",\"type\":\"uint256[]\"}],\"name\":\"rawFulfillRandomWords\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"s_vrfCoordinator\",\"outputs\":[{\"internalType\":\"contract IVRFCoordinatorV2Plus\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_vrfCoordinator\",\"type\":\"address\"}],\"name\":\"setCoordinator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"Rangga Yovie (Following Patrick Collins)\",\"details\":\"Implements Chainlink VRF v2\",\"kind\":\"dev\",\"methods\":{\"checkUpkeep(bytes)\":{\"details\":\"checkUpkeep adalah fungsi yang dipanggil oleh Chainlink Node (Off-chain). Node akan bertanya: \\\"Apakah sudah waktunya undian dijalankan?\\\" Syarat True: 1. Waktu sudah lewat (time passed) 2. Ada setidaknya 1 pemain & ada saldo ETH 3. Status undian sedang OPEN\"},\"performUpkeep(bytes)\":{\"details\":\"performUpkeep adalah fungsi yang dijalankan kalau checkUpkeep = TRUE.  Ini otomatis request angka acak\"}},\"title\":\"A sample Raffle Contract\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"acceptOwnership()\":{\"notice\":\"Allows an ownership transfer to be completed by the recipient.\"},\"owner()\":{\"notice\":\"Get the current owner\"},\"setCoordinator(address)\":{\"notice\":\"Sets the VRF Coordinator addressThis method should only be callable by the coordinator or contract owner\"},\"transferOwnership(address)\":{\"notice\":\"Allows an owner to begin transferring ownership to a new address.\"}},\"notice\":\"This contract is for creating an untamperable decentralized smart contract\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Raffle.sol\":\"Raffle\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@chainlink/contracts/src/v0.8/automation/interfaces/AutomationCompatibleInterface.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\n// solhint-disable-next-line interface-starts-with-i\\ninterface AutomationCompatibleInterface {\\n  /**\\n   * @notice method that is simulated by the keepers to see if any work actually\\n   * needs to be performed. This method does does not actually need to be\\n   * executable, and since it is only ever simulated it can consume lots of gas.\\n   * @dev To ensure that it is never called, you may want to add the\\n   * cannotExecute modifier from KeeperBase to your implementation of this\\n   * method.\\n   * @param checkData specified in the upkeep registration so it is always the\\n   * same for a registered upkeep. This can easily be broken down into specific\\n   * arguments using `abi.decode`, so multiple upkeeps can be registered on the\\n   * same contract and easily differentiated by the contract.\\n   * @return upkeepNeeded boolean to indicate whether the keeper should call\\n   * performUpkeep or not.\\n   * @return performData bytes that the keeper should call performUpkeep with, if\\n   * upkeep is needed. If you would like to encode data to decode later, try\\n   * `abi.encode`.\\n   */\\n  function checkUpkeep(\\n    bytes calldata checkData\\n  ) external returns (bool upkeepNeeded, bytes memory performData);\\n\\n  /**\\n   * @notice method that is actually executed by the keepers, via the registry.\\n   * The data returned by the checkUpkeep simulation will be passed into\\n   * this method to actually be executed.\\n   * @dev The input to this method should not be trusted, and the caller of the\\n   * method should not even be restricted to any single registry. Anyone should\\n   * be able call it, and the input should be validated, there is no guarantee\\n   * that the data passed in is the performData returned from checkUpkeep. This\\n   * could happen due to malicious keepers, racing keepers, or simply a state\\n   * change while the performUpkeep transaction is waiting for confirmation.\\n   * Always validate the data passed in.\\n   * @param performData is the data which was passed back from the checkData\\n   * simulation. If it is encoded, it can easily be decoded into other types by\\n   * calling `abi.decode`. This data should not be trusted, and should be\\n   * validated against the contract's current state.\\n   */\\n  function performUpkeep(\\n    bytes calldata performData\\n  ) external;\\n}\\n\",\"keccak256\":\"0xabb5a81f9380914fe192ba9e16aea6a948f8f949ad96052849207de2f40a2e3b\",\"license\":\"MIT\"},\"@chainlink/contracts/src/v0.8/shared/access/ConfirmedOwner.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\nimport {ConfirmedOwnerWithProposal} from \\\"./ConfirmedOwnerWithProposal.sol\\\";\\n\\n/// @title The ConfirmedOwner contract\\n/// @notice A contract with helpers for basic contract ownership.\\ncontract ConfirmedOwner is ConfirmedOwnerWithProposal {\\n  constructor(\\n    address newOwner\\n  ) ConfirmedOwnerWithProposal(newOwner, address(0)) {}\\n}\\n\",\"keccak256\":\"0xf73016e2473f54ab8d5c7e3c4ab2fa280a185ccfc80d2be48ac5d18016c3f717\",\"license\":\"MIT\"},\"@chainlink/contracts/src/v0.8/shared/access/ConfirmedOwnerWithProposal.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\nimport {IOwnable} from \\\"../interfaces/IOwnable.sol\\\";\\n\\n/// @title The ConfirmedOwner contract\\n/// @notice A contract with helpers for basic contract ownership.\\ncontract ConfirmedOwnerWithProposal is IOwnable {\\n  address private s_owner;\\n  address private s_pendingOwner;\\n\\n  event OwnershipTransferRequested(address indexed from, address indexed to);\\n  event OwnershipTransferred(address indexed from, address indexed to);\\n\\n  constructor(address newOwner, address pendingOwner) {\\n    // solhint-disable-next-line gas-custom-errors\\n    require(newOwner != address(0), \\\"Cannot set owner to zero\\\");\\n\\n    s_owner = newOwner;\\n    if (pendingOwner != address(0)) {\\n      _transferOwnership(pendingOwner);\\n    }\\n  }\\n\\n  /// @notice Allows an owner to begin transferring ownership to a new address.\\n  function transferOwnership(\\n    address to\\n  ) public override onlyOwner {\\n    _transferOwnership(to);\\n  }\\n\\n  /// @notice Allows an ownership transfer to be completed by the recipient.\\n  function acceptOwnership() external override {\\n    // solhint-disable-next-line gas-custom-errors\\n    require(msg.sender == s_pendingOwner, \\\"Must be proposed owner\\\");\\n\\n    address oldOwner = s_owner;\\n    s_owner = msg.sender;\\n    s_pendingOwner = address(0);\\n\\n    emit OwnershipTransferred(oldOwner, msg.sender);\\n  }\\n\\n  /// @notice Get the current owner\\n  function owner() public view override returns (address) {\\n    return s_owner;\\n  }\\n\\n  /// @notice validate, transfer ownership, and emit relevant events\\n  function _transferOwnership(\\n    address to\\n  ) private {\\n    // solhint-disable-next-line gas-custom-errors\\n    require(to != msg.sender, \\\"Cannot transfer to self\\\");\\n\\n    s_pendingOwner = to;\\n\\n    emit OwnershipTransferRequested(s_owner, to);\\n  }\\n\\n  /// @notice validate access\\n  function _validateOwnership() internal view {\\n    // solhint-disable-next-line gas-custom-errors\\n    require(msg.sender == s_owner, \\\"Only callable by owner\\\");\\n  }\\n\\n  /// @notice Reverts if called by anyone other than the contract owner.\\n  modifier onlyOwner() {\\n    _validateOwnership();\\n    _;\\n  }\\n}\\n\",\"keccak256\":\"0x521cf41e477e502d133e050a5f35625f2ec652327af7f1b21abf5b898f9b8df9\",\"license\":\"MIT\"},\"@chainlink/contracts/src/v0.8/shared/interfaces/IOwnable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\ninterface IOwnable {\\n  function owner() external returns (address);\\n\\n  function transferOwnership(\\n    address recipient\\n  ) external;\\n\\n  function acceptOwnership() external;\\n}\\n\",\"keccak256\":\"0x19f12817caa863b6785cf1e9085c66a93042fe906e41926bcb4a12bec9558d60\",\"license\":\"MIT\"},\"@chainlink/contracts/src/v0.8/vrf/dev/VRFConsumerBaseV2Plus.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.4;\\n\\nimport {ConfirmedOwner} from \\\"../../shared/access/ConfirmedOwner.sol\\\";\\nimport {IVRFCoordinatorV2Plus} from \\\"./interfaces/IVRFCoordinatorV2Plus.sol\\\";\\nimport {IVRFMigratableConsumerV2Plus} from \\\"./interfaces/IVRFMigratableConsumerV2Plus.sol\\\";\\n\\n/**\\n *\\n * @notice Interface for contracts using VRF randomness\\n * *****************************************************************************\\n * @dev PURPOSE\\n *\\n * @dev Reggie the Random Oracle (not his real job) wants to provide randomness\\n * @dev to Vera the verifier in such a way that Vera can be sure he's not\\n * @dev making his output up to suit himself. Reggie provides Vera a public key\\n * @dev to which he knows the secret key. Each time Vera provides a seed to\\n * @dev Reggie, he gives back a value which is computed completely\\n * @dev deterministically from the seed and the secret key.\\n *\\n * @dev Reggie provides a proof by which Vera can verify that the output was\\n * @dev correctly computed once Reggie tells it to her, but without that proof,\\n * @dev the output is indistinguishable to her from a uniform random sample\\n * @dev from the output space.\\n *\\n * @dev The purpose of this contract is to make it easy for unrelated contracts\\n * @dev to talk to Vera the verifier about the work Reggie is doing, to provide\\n * @dev simple access to a verifiable source of randomness. It ensures 2 things:\\n * @dev 1. The fulfillment came from the VRFCoordinatorV2Plus.\\n * @dev 2. The consumer contract implements fulfillRandomWords.\\n * *****************************************************************************\\n * @dev USAGE\\n *\\n * @dev Calling contracts must inherit from VRFConsumerBaseV2Plus, and can\\n * @dev initialize VRFConsumerBaseV2Plus's attributes in their constructor as\\n * @dev shown:\\n *\\n * @dev   contract VRFConsumerV2Plus is VRFConsumerBaseV2Plus {\\n * @dev     constructor(<other arguments>, address _vrfCoordinator, address _subOwner)\\n * @dev       VRFConsumerBaseV2Plus(_vrfCoordinator, _subOwner) public {\\n * @dev         <initialization with other arguments goes here>\\n * @dev       }\\n * @dev   }\\n *\\n * @dev The oracle will have given you an ID for the VRF keypair they have\\n * @dev committed to (let's call it keyHash). Create a subscription, fund it\\n * @dev and your consumer contract as a consumer of it (see VRFCoordinatorInterface\\n * @dev subscription management functions).\\n * @dev Call requestRandomWords(keyHash, subId, minimumRequestConfirmations,\\n * @dev callbackGasLimit, numWords, extraArgs),\\n * @dev see (IVRFCoordinatorV2Plus for a description of the arguments).\\n *\\n * @dev Once the VRFCoordinatorV2Plus has received and validated the oracle's response\\n * @dev to your request, it will call your contract's fulfillRandomWords method.\\n *\\n * @dev The randomness argument to fulfillRandomWords is a set of random words\\n * @dev generated from your requestId and the blockHash of the request.\\n *\\n * @dev If your contract could have concurrent requests open, you can use the\\n * @dev requestId returned from requestRandomWords to track which response is associated\\n * @dev with which randomness request.\\n * @dev See \\\"SECURITY CONSIDERATIONS\\\" for principles to keep in mind,\\n * @dev if your contract could have multiple requests in flight simultaneously.\\n *\\n * @dev Colliding `requestId`s are cryptographically impossible as long as seeds\\n * @dev differ.\\n *\\n * *****************************************************************************\\n * @dev SECURITY CONSIDERATIONS\\n *\\n * @dev A method with the ability to call your fulfillRandomness method directly\\n * @dev could spoof a VRF response with any random value, so it's critical that\\n * @dev it cannot be directly called by anything other than this base contract\\n * @dev (specifically, by the VRFConsumerBaseV2Plus.rawFulfillRandomness method).\\n *\\n * @dev For your users to trust that your contract's random behavior is free\\n * @dev from malicious interference, it's best if you can write it so that all\\n * @dev behaviors implied by a VRF response are executed *during* your\\n * @dev fulfillRandomness method. If your contract must store the response (or\\n * @dev anything derived from it) and use it later, you must ensure that any\\n * @dev user-significant behavior which depends on that stored value cannot be\\n * @dev manipulated by a subsequent VRF request.\\n *\\n * @dev Similarly, both miners and the VRF oracle itself have some influence\\n * @dev over the order in which VRF responses appear on the blockchain, so if\\n * @dev your contract could have multiple VRF requests in flight simultaneously,\\n * @dev you must ensure that the order in which the VRF responses arrive cannot\\n * @dev be used to manipulate your contract's user-significant behavior.\\n *\\n * @dev Since the block hash of the block which contains the requestRandomness\\n * @dev call is mixed into the input to the VRF *last*, a sufficiently powerful\\n * @dev miner could, in principle, fork the blockchain to evict the block\\n * @dev containing the request, forcing the request to be included in a\\n * @dev different block with a different hash, and therefore a different input\\n * @dev to the VRF. However, such an attack would incur a substantial economic\\n * @dev cost. This cost scales with the number of blocks the VRF oracle waits\\n * @dev until it calls responds to a request. It is for this reason that\\n * @dev that you can signal to an oracle you'd like them to wait longer before\\n * @dev responding to the request (however this is not enforced in the contract\\n * @dev and so remains effective only in the case of unmodified oracle software).\\n */\\nabstract contract VRFConsumerBaseV2Plus is IVRFMigratableConsumerV2Plus, ConfirmedOwner {\\n  error OnlyCoordinatorCanFulfill(address have, address want);\\n  error OnlyOwnerOrCoordinator(address have, address owner, address coordinator);\\n  error ZeroAddress();\\n\\n  // s_vrfCoordinator should be used by consumers to make requests to vrfCoordinator\\n  // so that coordinator reference is updated after migration\\n  IVRFCoordinatorV2Plus public s_vrfCoordinator;\\n\\n  /**\\n   * @param _vrfCoordinator address of VRFCoordinator contract\\n   */\\n  constructor(\\n    address _vrfCoordinator\\n  ) ConfirmedOwner(msg.sender) {\\n    if (_vrfCoordinator == address(0)) {\\n      revert ZeroAddress();\\n    }\\n    s_vrfCoordinator = IVRFCoordinatorV2Plus(_vrfCoordinator);\\n  }\\n\\n  /**\\n   * @notice fulfillRandomness handles the VRF response. Your contract must\\n   * @notice implement it. See \\\"SECURITY CONSIDERATIONS\\\" above for important\\n   * @notice principles to keep in mind when implementing your fulfillRandomness\\n   * @notice method.\\n   *\\n   * @dev VRFConsumerBaseV2Plus expects its subcontracts to have a method with this\\n   * @dev signature, and will call it once it has verified the proof\\n   * @dev associated with the randomness. (It is triggered via a call to\\n   * @dev rawFulfillRandomness, below.)\\n   *\\n   * @param requestId The Id initially returned by requestRandomness\\n   * @param randomWords the VRF output expanded to the requested number of words\\n   */\\n  // solhint-disable-next-line chainlink-solidity/prefix-internal-functions-with-underscore\\n  function fulfillRandomWords(uint256 requestId, uint256[] calldata randomWords) internal virtual;\\n\\n  // rawFulfillRandomness is called by VRFCoordinator when it receives a valid VRF\\n  // proof. rawFulfillRandomness then calls fulfillRandomness, after validating\\n  // the origin of the call\\n  function rawFulfillRandomWords(uint256 requestId, uint256[] calldata randomWords) external {\\n    if (msg.sender != address(s_vrfCoordinator)) {\\n      revert OnlyCoordinatorCanFulfill(msg.sender, address(s_vrfCoordinator));\\n    }\\n    fulfillRandomWords(requestId, randomWords);\\n  }\\n\\n  /**\\n   * @inheritdoc IVRFMigratableConsumerV2Plus\\n   */\\n  function setCoordinator(\\n    address _vrfCoordinator\\n  ) external override onlyOwnerOrCoordinator {\\n    if (_vrfCoordinator == address(0)) {\\n      revert ZeroAddress();\\n    }\\n    s_vrfCoordinator = IVRFCoordinatorV2Plus(_vrfCoordinator);\\n\\n    emit CoordinatorSet(_vrfCoordinator);\\n  }\\n\\n  modifier onlyOwnerOrCoordinator() {\\n    if (msg.sender != owner() && msg.sender != address(s_vrfCoordinator)) {\\n      revert OnlyOwnerOrCoordinator(msg.sender, owner(), address(s_vrfCoordinator));\\n    }\\n    _;\\n  }\\n}\\n\",\"keccak256\":\"0xb8be2be9ad825b833975179c27367a01dfbaa987751f298205f16ab73afcf703\",\"license\":\"MIT\"},\"@chainlink/contracts/src/v0.8/vrf/dev/interfaces/IVRFCoordinatorV2Plus.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\nimport {VRFV2PlusClient} from \\\"../libraries/VRFV2PlusClient.sol\\\";\\nimport {IVRFSubscriptionV2Plus} from \\\"./IVRFSubscriptionV2Plus.sol\\\";\\n\\n// Interface that enables consumers of VRFCoordinatorV2Plus to be future-proof for upgrades\\n// This interface is supported by subsequent versions of VRFCoordinatorV2Plus\\ninterface IVRFCoordinatorV2Plus is IVRFSubscriptionV2Plus {\\n  /**\\n   * @notice Request a set of random words.\\n   * @param req - a struct containing following fields for randomness request:\\n   * keyHash - Corresponds to a particular oracle job which uses\\n   * that key for generating the VRF proof. Different keyHash's have different gas price\\n   * ceilings, so you can select a specific one to bound your maximum per request cost.\\n   * subId  - The ID of the VRF subscription. Must be funded\\n   * with the minimum subscription balance required for the selected keyHash.\\n   * requestConfirmations - How many blocks you'd like the\\n   * oracle to wait before responding to the request. See SECURITY CONSIDERATIONS\\n   * for why you may want to request more. The acceptable range is\\n   * [minimumRequestBlockConfirmations, 200].\\n   * callbackGasLimit - How much gas you'd like to receive in your\\n   * fulfillRandomWords callback. Note that gasleft() inside fulfillRandomWords\\n   * may be slightly less than this amount because of gas used calling the function\\n   * (argument decoding etc.), so you may need to request slightly more than you expect\\n   * to have inside fulfillRandomWords. The acceptable range is\\n   * [0, maxGasLimit]\\n   * numWords - The number of uint256 random values you'd like to receive\\n   * in your fulfillRandomWords callback. Note these numbers are expanded in a\\n   * secure way by the VRFCoordinator from a single random value supplied by the oracle.\\n   * extraArgs - abi-encoded extra args\\n   * @return requestId - A unique identifier of the request. Can be used to match\\n   * a request to a response in fulfillRandomWords.\\n   */\\n  function requestRandomWords(\\n    VRFV2PlusClient.RandomWordsRequest calldata req\\n  ) external returns (uint256 requestId);\\n}\\n\",\"keccak256\":\"0x7fa2fd69fb4a3313506f4d556667fd0c918d43441dbdb6ffa41339ac97e1e5b1\",\"license\":\"MIT\"},\"@chainlink/contracts/src/v0.8/vrf/dev/interfaces/IVRFMigratableConsumerV2Plus.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\n/// @notice The IVRFMigratableConsumerV2Plus interface defines the\\n/// @notice method required to be implemented by all V2Plus consumers.\\n/// @dev This interface is designed to be used in VRFConsumerBaseV2Plus.\\ninterface IVRFMigratableConsumerV2Plus {\\n  event CoordinatorSet(address vrfCoordinator);\\n\\n  /// @notice Sets the VRF Coordinator address\\n  /// @notice This method should only be callable by the coordinator or contract owner\\n  function setCoordinator(\\n    address vrfCoordinator\\n  ) external;\\n}\\n\",\"keccak256\":\"0xd1b8053c786c6771bc5d27ea0cfa6fbf73fbbc0f3d900ac0fea50a7ebcd581b1\",\"license\":\"MIT\"},\"@chainlink/contracts/src/v0.8/vrf/dev/interfaces/IVRFSubscriptionV2Plus.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\n/// @notice The IVRFSubscriptionV2Plus interface defines the subscription\\n/// @notice related methods implemented by the V2Plus coordinator.\\ninterface IVRFSubscriptionV2Plus {\\n  /**\\n   * @notice Add a consumer to a VRF subscription.\\n   * @param subId - ID of the subscription\\n   * @param consumer - New consumer which can use the subscription\\n   */\\n  function addConsumer(uint256 subId, address consumer) external;\\n\\n  /**\\n   * @notice Remove a consumer from a VRF subscription.\\n   * @param subId - ID of the subscription\\n   * @param consumer - Consumer to remove from the subscription\\n   */\\n  function removeConsumer(uint256 subId, address consumer) external;\\n\\n  /**\\n   * @notice Cancel a subscription\\n   * @param subId - ID of the subscription\\n   * @param to - Where to send the remaining LINK to\\n   */\\n  function cancelSubscription(uint256 subId, address to) external;\\n\\n  /**\\n   * @notice Accept subscription owner transfer.\\n   * @param subId - ID of the subscription\\n   * @dev will revert if original owner of subId has\\n   * not requested that msg.sender become the new owner.\\n   */\\n  function acceptSubscriptionOwnerTransfer(\\n    uint256 subId\\n  ) external;\\n\\n  /**\\n   * @notice Request subscription owner transfer.\\n   * @param subId - ID of the subscription\\n   * @param newOwner - proposed new owner of the subscription\\n   */\\n  function requestSubscriptionOwnerTransfer(uint256 subId, address newOwner) external;\\n\\n  /**\\n   * @notice Create a VRF subscription.\\n   * @return subId - A unique subscription id.\\n   * @dev You can manage the consumer set dynamically with addConsumer/removeConsumer.\\n   * @dev Note to fund the subscription with LINK, use transferAndCall. For example\\n   * @dev  LINKTOKEN.transferAndCall(\\n   * @dev    address(COORDINATOR),\\n   * @dev    amount,\\n   * @dev    abi.encode(subId));\\n   * @dev Note to fund the subscription with Native, use fundSubscriptionWithNative. Be sure\\n   * @dev  to send Native with the call, for example:\\n   * @dev COORDINATOR.fundSubscriptionWithNative{value: amount}(subId);\\n   */\\n  function createSubscription() external returns (uint256 subId);\\n\\n  /**\\n   * @notice Get a VRF subscription.\\n   * @param subId - ID of the subscription\\n   * @return balance - LINK balance of the subscription in juels.\\n   * @return nativeBalance - native balance of the subscription in wei.\\n   * @return reqCount - Requests count of subscription.\\n   * @return owner - owner of the subscription.\\n   * @return consumers - list of consumer address which are able to use this subscription.\\n   */\\n  function getSubscription(\\n    uint256 subId\\n  )\\n    external\\n    view\\n    returns (uint96 balance, uint96 nativeBalance, uint64 reqCount, address owner, address[] memory consumers);\\n\\n  /*\\n   * @notice Check to see if there exists a request commitment consumers\\n   * for all consumers and keyhashes for a given sub.\\n   * @param subId - ID of the subscription\\n   * @return true if there exists at least one unfulfilled request for the subscription, false\\n   * otherwise.\\n   */\\n  function pendingRequestExists(\\n    uint256 subId\\n  ) external view returns (bool);\\n\\n  /**\\n   * @notice Paginate through all active VRF subscriptions.\\n   * @param startIndex index of the subscription to start from\\n   * @param maxCount maximum number of subscriptions to return, 0 to return all\\n   * @dev the order of IDs in the list is **not guaranteed**, therefore, if making successive calls, one\\n   * @dev should consider keeping the blockheight constant to ensure a holistic picture of the contract state\\n   */\\n  function getActiveSubscriptionIds(uint256 startIndex, uint256 maxCount) external view returns (uint256[] memory);\\n\\n  /**\\n   * @notice Fund a subscription with native.\\n   * @param subId - ID of the subscription\\n   * @notice This method expects msg.value to be greater than or equal to 0.\\n   */\\n  function fundSubscriptionWithNative(\\n    uint256 subId\\n  ) external payable;\\n}\\n\",\"keccak256\":\"0xb782e66b6a2a87df6f70c2a8aa3aa6e4db5711edfe5a831b9d585a4b975bb7a8\",\"license\":\"MIT\"},\"@chainlink/contracts/src/v0.8/vrf/dev/libraries/VRFV2PlusClient.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.4;\\n\\n// End consumer library.\\nlibrary VRFV2PlusClient {\\n  // extraArgs will evolve to support new features\\n  bytes4 public constant EXTRA_ARGS_V1_TAG = bytes4(keccak256(\\\"VRF ExtraArgsV1\\\"));\\n\\n  struct ExtraArgsV1 {\\n    bool nativePayment;\\n  }\\n\\n  struct RandomWordsRequest {\\n    bytes32 keyHash;\\n    uint256 subId;\\n    uint16 requestConfirmations;\\n    uint32 callbackGasLimit;\\n    uint32 numWords;\\n    bytes extraArgs;\\n  }\\n\\n  function _argsToBytes(\\n    ExtraArgsV1 memory extraArgs\\n  ) internal pure returns (bytes memory bts) {\\n    return abi.encodeWithSelector(EXTRA_ARGS_V1_TAG, extraArgs);\\n  }\\n}\\n\",\"keccak256\":\"0xb0b1a6f3f0d59aca5c805994d8f64c24f570c280422f976dbae20f8b5b24b47c\",\"license\":\"MIT\"},\"contracts/Raffle.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\r\\npragma solidity ^0.8.18;\\r\\n\\r\\n// 1. IMPORT CHAINLINK VRF\\r\\n// import \\\"@chainlink/contracts/src/v0.8/vrf/interfaces/VRFCoordinatorV2Interface.sol\\\";\\r\\n// import \\\"@chainlink/contracts/src/v0.8/vrf/VRFConsumerBaseV2.sol\\\";\\r\\n// Import Baru: Automation (Keepers)\\r\\n// import \\\"@chainlink/contracts/src/v0.8/automation/interfaces/AutomationCompatibleInterface.sol\\\";\\r\\n\\r\\nimport {VRFConsumerBaseV2Plus} from \\\"@chainlink/contracts/src/v0.8/vrf/dev/VRFConsumerBaseV2Plus.sol\\\";\\r\\nimport {VRFV2PlusClient} from \\\"@chainlink/contracts/src/v0.8/vrf/dev/libraries/VRFV2PlusClient.sol\\\";\\r\\nimport {AutomationCompatibleInterface} from \\\"@chainlink/contracts/src/v0.8/automation/interfaces/AutomationCompatibleInterface.sol\\\";\\r\\n\\r\\nerror Raffle__NotEnoughETHEntered();\\r\\nerror Raffle__TransferFailed(); // Error baru kalau gagal kirim uang\\r\\n//Baru\\r\\nerror Raffle__NotOpen(); // Error kalau mau masuk pas lagi ngocok\\r\\nerror Raffle__UpkeepNotNeeded(uint256 currentBalance, uint256 numPlayers, uint256 raffleState);\\r\\n\\r\\n/**\\r\\n * @title A sample Raffle Contract\\r\\n * @author Rangga Yovie (Following Patrick Collins)\\r\\n * @notice This contract is for creating an untamperable decentralized smart contract\\r\\n * @dev Implements Chainlink VRF v2\\r\\n */\\r\\n\\r\\n// 2. INHERITANCE: Kontrak Kita adalah 'anak' dari VRFConsumerBaseV2\\r\\ncontract Raffle is VRFConsumerBaseV2Plus, AutomationCompatibleInterface {\\r\\n    // Baru\\r\\n    // Enum: Status Undian (Buka atau sedang menghitung)\\r\\n    enum RaffleState {\\r\\n        OPEN,\\r\\n        CALCULATING\\r\\n    }\\r\\n    \\r\\n    /* Type declarations */\\r\\n    // (Tidak ada untuk saat ini)\\r\\n\\r\\n    /* State Variables */\\r\\n    uint256 private immutable i_entranceFee;\\r\\n    // Kita simpan peserta di array address payable (karena kita akan kirim uang ke pemenang)\\r\\n    address payable[] private s_players;\\r\\n\\r\\n    // --- VARIABEL CHAINLINK VRF ---\\r\\n    // VRFCoordinatorV2Interface private immutable i_vrfCoordinator;\\r\\n    bytes32 private immutable i_gasLane; // KeyHash (Seberapa mahal gas yang rela kita bayar)\\r\\n    uint256 private immutable i_subscriptionId; // ID Langganan Chainlink kita\\r\\n    uint32 private immutable i_callbackGasLimit; // Batas gas untuk fungsi callback\\r\\n    uint16 private constant REQUEST_CONFIRMATIONS = 3; // Tunggu 3 blok biar aman\\r\\n    uint32 private constant NUM_WORDS = 1; // Kita cuma butuh 1 angka acak\\r\\n\\r\\n    // --- VARIABEL BARU UNTUK OTOMATISASI ---\\r\\n    address private s_recentWinner;\\r\\n    RaffleState private s_raffleState; // Status saat ini\\r\\n    uint256 private s_lastTimeStamp; // Kapan terakhir undian jalan?\\r\\n    uint256 private immutable i_interval; // Seberapa sering undian jalan? (detik)\\r\\n\\r\\n    /* Events */\\r\\n    // Event dipancarkan saat ada orang masuk lotre (bagus untuk frontend indexing)\\r\\n    event RaffleEnter(address indexed player);\\r\\n    event RequestedRaffleWinner(uint256 indexed requestId); // Event saat minta acak\\r\\n    event WinnerPicked(address indexed winner); // Event saat pemenang terpilih\\r\\n\\r\\n    /* Errors */\\r\\n    // error Raffle__NotEnoughETHEntered();\\r\\n\\r\\n    constructor(\\r\\n        address vrfCoordinatorV2,\\r\\n        uint256 entranceFee,\\r\\n        bytes32 gasLane,\\r\\n        uint256 subscriptionId,\\r\\n        uint32 callbackGasLimit,\\r\\n        uint256 interval\\r\\n    ) VRFConsumerBaseV2Plus(vrfCoordinatorV2) {\\r\\n        i_entranceFee = entranceFee;\\r\\n        // i_vrfCoordinator = VRFCoordinatorV2Interface(vrfCoordinatorV2);\\r\\n        i_gasLane = gasLane;\\r\\n        i_subscriptionId = subscriptionId;\\r\\n        i_callbackGasLimit = callbackGasLimit;\\r\\n        i_interval = interval;\\r\\n        s_lastTimeStamp = block.timestamp; // Set waktu awal\\r\\n        s_raffleState = RaffleState.OPEN; // Set status awal: buka\\r\\n    }\\r\\n\\r\\n    // Fungsi untuk beli tiket\\r\\n    function enterRaffle() public payable {\\r\\n        // 1. Validasi: Apakah uangnya cukup?\\r\\n        // Kita ganti require(msg.value > i_entranceFee, \\\"Not enough ETH\\\") dengan Custom Error\\r\\n        if (msg.value < i_entranceFee) {\\r\\n            revert Raffle__NotEnoughETHEntered();\\r\\n        }\\r\\n\\r\\n        // Tidak boleh masuk kalau lagi ngocok arisan\\r\\n        if(s_raffleState != RaffleState.OPEN){\\r\\n            revert Raffle__NotOpen();\\r\\n        }\\r\\n\\r\\n        // 2. Simpan pemain ke array\\r\\n        // Kita casting msg.sender menjadi payable agar nanti bisa dikirimi hadiah\\r\\n        s_players.push(payable(msg.sender));\\r\\n\\r\\n        // 3. Emit Event\\r\\n        emit RaffleEnter(msg.sender);\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @dev checkUpkeep adalah fungsi yang dipanggil oleh Chainlink Node (Off-chain).\\r\\n     * Node akan bertanya: \\\"Apakah sudah waktunya undian dijalankan?\\\"\\r\\n     * Syarat True:\\r\\n     * 1. Waktu sudah lewat (time passed)\\r\\n     * 2. Ada setidaknya 1 pemain & ada saldo ETH\\r\\n     * 3. Status undian sedang OPEN\\r\\n     */\\r\\n    function checkUpkeep(\\r\\n        bytes memory /* checkData */\\r\\n    ) public view override returns(bool upkeepNeeded, bytes memory /* performData */){\\r\\n        bool isOpen = (RaffleState.OPEN == s_raffleState);\\r\\n        // (Waktu Sekarang - Waktu Terakhir) > Interval ?\\r\\n        bool timePassed = ((block.timestamp - s_lastTimeStamp) > i_interval);\\r\\n        bool hasPlayers = (s_players.length > 0);\\r\\n        bool hasBalance = address(this).balance > 0;\\r\\n\\r\\n        // upkeepNeeded bernilai TRUE jika SEMUA syarat terpenuhi\\r\\n        upkeepNeeded = (isOpen && timePassed && hasPlayers && hasBalance);\\r\\n        return (upkeepNeeded, \\\"0x0\\\");\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @dev performUpkeep adalah fungsi yang dijalankan kalau checkUpkeep = TRUE. \\r\\n     * Ini otomatis request angka acak\\r\\n     */\\r\\n    function performUpkeep(\\r\\n        bytes calldata /* Perform Data */\\r\\n    ) external override {\\r\\n        // Cek lagi (validasi ganda) supaya gak bisa dipanggil manual sembarangan\\r\\n        (bool upkeepNeeded, ) = checkUpkeep(\\\"\\\");\\r\\n        if (!upkeepNeeded){\\r\\n            revert Raffle__UpkeepNotNeeded(\\r\\n                address(this).balance,\\r\\n                s_players.length,\\r\\n                uint256(s_raffleState)\\r\\n            );\\r\\n        }\\r\\n\\r\\n        // Ubah status jadi CALCULATING (Biar gak ada yang masuk lagi)\\r\\n        s_raffleState = RaffleState.CALCULATING;\\r\\n\\r\\n        // Request Randomness (Sama kayak kode sebelumnya)\\r\\n        // uint256 requestId = i_vrfCoordinator.requestRandomWords(\\r\\n        //     i_gasLane,\\r\\n        //     i_subscriptionId,\\r\\n        //     REQUEST_CONFIRMATIONS,\\r\\n        //     i_callbackGasLimit,\\r\\n        //     NUM_WORDS\\r\\n        // );\\r\\n        // Request baru\\r\\n        uint256 requestId = s_vrfCoordinator.requestRandomWords(\\r\\n            VRFV2PlusClient.RandomWordsRequest({\\r\\n                keyHash: i_gasLane,\\r\\n                subId: i_subscriptionId,\\r\\n                requestConfirmations: REQUEST_CONFIRMATIONS,\\r\\n                callbackGasLimit: i_callbackGasLimit,\\r\\n                numWords: NUM_WORDS,\\r\\n                extraArgs: VRFV2PlusClient._argsToBytes(VRFV2PlusClient.ExtraArgsV1({nativePayment: false}))\\r\\n            })\\r\\n        );\\r\\n        emit RequestedRaffleWinner(requestId);\\r\\n    }\\r\\n\\r\\n    // --- FUNGSI BARU 1: REQUEST RANDOMNESS ---\\r\\n    // Fungsi ini dipanggil untuk MEMULAI pengocokan\\r\\n    // function requestRandomWinner() external {\\r\\n    //     // Minta angka acak ke Chainlink Coordinator\\r\\n    //     uint256 requestId = i_vrfCoordinator.requestRandomWords(\\r\\n    //         i_gasLane,\\r\\n    //         i_subscriptionId,\\r\\n    //         REQUEST_CONFIRMATIONS,\\r\\n    //         i_callbackGasLimit,\\r\\n    //         NUM_WORDS\\r\\n    //     );\\r\\n    //     emit RequestedRaffleWinner(requestId);\\r\\n    // }\\r\\n\\r\\n    // --- FUNGSI BARU 2: FULFILL RANDOMNESS ---\\r\\n    // Fungsi ini dipanggil OLEH CHAINLINK (Bukan oleh kita)\\r\\n    // Chainlink akan mengirimkan angka acak lewat parameter 'randomWords'\\r\\n    function fulfillRandomWords(\\r\\n        uint256, /* requestId */\\r\\n        uint256[] calldata randomWords\\r\\n    ) internal override {\\r\\n        // A. Tentukan Pemenang pakai Module (%)\\r\\n        // Contoh: AngkaAcak 202, Pemain ada 10\\r\\n        // 202 % 10 = sisa 2. Maka pemain index ke-2 yang menang.\\r\\n        uint256 indexOfWinner = randomWords[0] % s_players.length;\\r\\n        address payable recentWinner = s_players[indexOfWinner];\\r\\n\\r\\n        s_recentWinner = recentWinner; // Simpan pemenang di variabel state\\r\\n\\r\\n        // B. Reset Array Pemain (Kosongkan untuk ronde selanjutnya)\\r\\n        s_players = new address payable[](0);\\r\\n\\r\\n        s_raffleState = RaffleState.OPEN;\\r\\n        s_lastTimeStamp = block.timestamp; // Reset waktu timer\\r\\n\\r\\n        // C. Kirim Uang ke Pemenang\\r\\n        (bool success, ) = recentWinner.call{value: address(this).balance}(\\\"\\\");\\r\\n        if (!success){\\r\\n            revert Raffle__TransferFailed();\\r\\n        }\\r\\n\\r\\n        emit WinnerPicked(recentWinner);\\r\\n    }\\r\\n\\r\\n    // Fungsi getter (View/Pure)\\r\\n    function getEntranceFee() public view returns (uint256) {\\r\\n        return i_entranceFee;\\r\\n    }\\r\\n\\r\\n    function getPlayer(uint256 index) public view returns (address) {\\r\\n        return s_players[index];\\r\\n    }\\r\\n\\r\\n    function getRecentWinner() public view returns (address){ return s_recentWinner; }\\r\\n    function getRaffleState() public view returns (RaffleState) {return s_raffleState; }\\r\\n    function getNumWords() public pure returns (uint256) {return NUM_WORDS;}\\r\\n    function getNumberOfPlayers() public view returns (uint256) {return s_players.length;}\\r\\n    function getLatestTimeStamp() public view returns (uint256) {return s_lastTimeStamp;}\\r\\n    function getRequestConfirmations() public pure returns (uint256) {return REQUEST_CONFIRMATIONS;}\\r\\n    function getInterval() public view returns (uint256) {return i_interval;}\\r\\n}\",\"keccak256\":\"0xc3a62b0726082eced5cb6fefbe464ff1c581a118833e87d5a3d1ae56d58c2e67\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x61012060405234801561001157600080fd5b5060405161253a38038061253a8339818101604052810190610033919061047e565b85338060008073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff16036100a6576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040161009d90610568565b60405180910390fd5b816000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff161461012a576101298161024760201b60201c565b5b505050600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff1603610193576040517fd92e233d00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b80600260006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505084608081815250508360a081815250508260c081815250508163ffffffff1660e08163ffffffff1681525050806101008181525050426005819055506000600460146101000a81548160ff0219169083600181111561023757610236610588565b5b0217905550505050505050610623565b3373ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff16036102b5576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004016102ac90610603565b60405180910390fd5b80600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508073ffffffffffffffffffffffffffffffffffffffff1660008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167fed8889f560326eb138920d842192f0eb3dd22b4f139c87a2c57538e05bae127860405160405180910390a350565b600080fd5b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b60006103a382610378565b9050919050565b6103b381610398565b81146103be57600080fd5b50565b6000815190506103d0816103aa565b92915050565b6000819050919050565b6103e9816103d6565b81146103f457600080fd5b50565b600081519050610406816103e0565b92915050565b6000819050919050565b61041f8161040c565b811461042a57600080fd5b50565b60008151905061043c81610416565b92915050565b600063ffffffff82169050919050565b61045b81610442565b811461046657600080fd5b50565b60008151905061047881610452565b92915050565b60008060008060008060c0878903121561049b5761049a610373565b5b60006104a989828a016103c1565b96505060206104ba89828a016103f7565b95505060406104cb89828a0161042d565b94505060606104dc89828a016103f7565b93505060806104ed89828a01610469565b92505060a06104fe89828a016103f7565b9150509295509295509295565b600082825260208201905092915050565b7f43616e6e6f7420736574206f776e657220746f207a65726f0000000000000000600082015250565b600061055260188361050b565b915061055d8261051c565b602082019050919050565b6000602082019050818103600083015261058181610545565b9050919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052602160045260246000fd5b7f43616e6e6f74207472616e7366657220746f2073656c66000000000000000000600082015250565b60006105ed60178361050b565b91506105f8826105b7565b602082019050919050565b6000602082019050818103600083015261061c816105e0565b9050919050565b60805160a05160c05160e05161010051611ec5610675600039600081816109430152610d8b015260006107d2015260006107a10152600061077b01526000818161040001526105030152611ec56000f3fe6080604052600436106101095760003560e01c80636e04ff0d1161009557806391ad27b41161006457806391ad27b4146103155780639eccacf614610340578063e55ae4e81461036b578063f2fde38b146103a8578063fd6673f5146103d157610109565b80636e04ff0d1461026c57806379ba5097146102aa5780638da5cb5b146102c15780638ea98117146102ec57610109565b8063320229eb116100dc578063320229eb146101975780634585e33b146101c2578063473f1ddc146101eb57806353a2c19a146102165780635f1b0fd81461024157610109565b806309bc33a71461010e578063115cbaf5146101395780631fe543e3146101645780632cfcc5391461018d575b600080fd5b34801561011a57600080fd5b506101236103fc565b6040516101309190611385565b60405180910390f35b34801561014557600080fd5b5061014e610424565b60405161015b9190611417565b60405180910390f35b34801561017057600080fd5b5061018b600480360381019061018691906114d7565b61043b565b005b610195610501565b005b3480156101a357600080fd5b506101ac610670565b6040516101b99190611385565b60405180910390f35b3480156101ce57600080fd5b506101e960048036038101906101e4919061158d565b61067a565b005b3480156101f757600080fd5b506102006108ba565b60405161020d919061161b565b60405180910390f35b34801561022257600080fd5b5061022b6108e4565b6040516102389190611385565b60405180910390f35b34801561024d57600080fd5b506102566108f3565b6040516102639190611385565b60405180910390f35b34801561027857600080fd5b50610293600480360381019061028e9190611777565b610900565b6040516102a192919061185a565b60405180910390f35b3480156102b657600080fd5b506102bf6109e8565b005b3480156102cd57600080fd5b506102d6610b7d565b6040516102e3919061161b565b60405180910390f35b3480156102f857600080fd5b50610313600480360381019061030e91906118b6565b610ba6565b005b34801561032157600080fd5b5061032a610d87565b6040516103379190611385565b60405180910390f35b34801561034c57600080fd5b50610355610daf565b6040516103629190611942565b60405180910390f35b34801561037757600080fd5b50610392600480360381019061038d919061195d565b610dd5565b60405161039f919061161b565b60405180910390f35b3480156103b457600080fd5b506103cf60048036038101906103ca91906118b6565b610e1d565b005b3480156103dd57600080fd5b506103e6610e31565b6040516103f39190611385565b60405180910390f35b60007f0000000000000000000000000000000000000000000000000000000000000000905090565b6000600460149054906101000a900460ff16905090565b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146104f15733600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff166040517f1cf993f40000000000000000000000000000000000000000000000000000000081526004016104e892919061198a565b60405180910390fd5b6104fc838383610e3e565b505050565b7f000000000000000000000000000000000000000000000000000000000000000034101561055b576040517fbd4e069500000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6000600181111561056f5761056e6113a0565b5b600460149054906101000a900460ff166001811115610591576105906113a0565b5b146105c8576040517f1425571c00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6003339080600181540180825580915050600190039060005260206000200160009091909190916101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055503373ffffffffffffffffffffffffffffffffffffffff167f0805e1d667bddb8a95f0f09880cf94f403fb596ce79928d9f29b74203ba284d460405160405180910390a2565b6000600554905090565b600061069460405180602001604052806000815250610900565b509050806107035747600380549050600460149054906101000a900460ff1660018111156106c5576106c46113a0565b5b6040517f584327aa0000000000000000000000000000000000000000000000000000000081526004016106fa939291906119b3565b60405180910390fd5b6001600460146101000a81548160ff02191690836001811115610729576107286113a0565b5b02179055506000600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16639b1c385e6040518060c001604052807f000000000000000000000000000000000000000000000000000000000000000081526020017f00000000000000000000000000000000000000000000000000000000000000008152602001600361ffff1681526020017f000000000000000000000000000000000000000000000000000000000000000063ffffffff168152602001600163ffffffff168152602001610823604051806020016040528060001515815250611071565b8152506040518263ffffffff1660e01b81526004016108429190611b21565b6020604051808303816000875af1158015610861573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906108859190611b58565b9050807fcd6e45c8998311cab7e9d4385596cac867e20a0587194b954fa3a731c93ce78b60405160405180910390a250505050565b6000600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6000600163ffffffff16905090565b6000600361ffff16905090565b600060606000600460149054906101000a900460ff166001811115610928576109276113a0565b5b6000600181111561093c5761093b6113a0565b5b14905060007f0000000000000000000000000000000000000000000000000000000000000000600554426109709190611bb4565b119050600080600380549050119050600080471190508380156109905750825b80156109995750815b80156109a25750805b9550856040518060400160405280600381526020017f30783000000000000000000000000000000000000000000000000000000000008152509550955050505050915091565b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614610a78576040517f08c379a0000000000000000000000000000000000000000000000000000000008152600401610a6f90611c45565b60405180910390fd5b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff169050336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506000600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055503373ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a350565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b610bae610b7d565b73ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614158015610c375750600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614155b15610ca65733610c45610b7d565b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff166040517f061db9c1000000000000000000000000000000000000000000000000000000008152600401610c9d93929190611c65565b60405180910390fd5b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff1603610d0c576040517fd92e233d00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b80600260006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055507fd1a6a14209a385a964d036e404cb5cfb71f4000cdb03c9366292430787261be681604051610d7c919061161b565b60405180910390a150565b60007f0000000000000000000000000000000000000000000000000000000000000000905090565b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600060038281548110610deb57610dea611c9c565b5b9060005260206000200160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff169050919050565b610e25611109565b610e2e81611199565b50565b6000600380549050905090565b600060038054905083836000818110610e5a57610e59611c9c565b5b90506020020135610e6b9190611cfa565b9050600060038281548110610e8357610e82611c9c565b5b9060005260206000200160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905080600460006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550600067ffffffffffffffff811115610f0c57610f0b61164c565b5b604051908082528060200260200182016040528015610f3a5781602001602082028036833780820191505090505b5060039080519060200190610f509291906112c5565b506000600460146101000a81548160ff02191690836001811115610f7757610f766113a0565b5b02179055504260058190555060008173ffffffffffffffffffffffffffffffffffffffff1647604051610fa990611d5c565b60006040518083038185875af1925050503d8060008114610fe6576040519150601f19603f3d011682016040523d82523d6000602084013e610feb565b606091505b5050905080611026576040517fa1d04b3900000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b8173ffffffffffffffffffffffffffffffffffffffff167f5b690ec4a06fe979403046eaeea5b3ce38524683c3001f662c8b5a829632f7df60405160405180910390a2505050505050565b60607f92fd13387c7fe7befbc38d303d6468778fb9731bc4583f17d92989c6fcfdeaaa826040516024016110a59190611d9c565b604051602081830303815290604052907bffffffffffffffffffffffffffffffffffffffffffffffffffffffff19166020820180517bffffffffffffffffffffffffffffffffffffffffffffffffffffffff83818316178352505050509050919050565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614611197576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040161118e90611e03565b60405180910390fd5b565b3373ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff1603611207576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004016111fe90611e6f565b60405180910390fd5b80600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508073ffffffffffffffffffffffffffffffffffffffff1660008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167fed8889f560326eb138920d842192f0eb3dd22b4f139c87a2c57538e05bae127860405160405180910390a350565b82805482825590600052602060002090810192821561133e579160200282015b8281111561133d5782518260006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550916020019190600101906112e5565b5b50905061134b919061134f565b5090565b5b80821115611368576000816000905550600101611350565b5090565b6000819050919050565b61137f8161136c565b82525050565b600060208201905061139a6000830184611376565b92915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052602160045260246000fd5b600281106113e0576113df6113a0565b5b50565b60008190506113f1826113cf565b919050565b6000611401826113e3565b9050919050565b611411816113f6565b82525050565b600060208201905061142c6000830184611408565b92915050565b6000604051905090565b600080fd5b600080fd5b61144f8161136c565b811461145a57600080fd5b50565b60008135905061146c81611446565b92915050565b600080fd5b600080fd5b600080fd5b60008083601f84011261149757611496611472565b5b8235905067ffffffffffffffff8111156114b4576114b3611477565b5b6020830191508360208202830111156114d0576114cf61147c565b5b9250929050565b6000806000604084860312156114f0576114ef61143c565b5b60006114fe8682870161145d565b935050602084013567ffffffffffffffff81111561151f5761151e611441565b5b61152b86828701611481565b92509250509250925092565b60008083601f84011261154d5761154c611472565b5b8235905067ffffffffffffffff81111561156a57611569611477565b5b6020830191508360018202830111156115865761158561147c565b5b9250929050565b600080602083850312156115a4576115a361143c565b5b600083013567ffffffffffffffff8111156115c2576115c1611441565b5b6115ce85828601611537565b92509250509250929050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b6000611605826115da565b9050919050565b611615816115fa565b82525050565b6000602082019050611630600083018461160c565b92915050565b600080fd5b6000601f19601f8301169050919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b6116848261163b565b810181811067ffffffffffffffff821117156116a3576116a261164c565b5b80604052505050565b60006116b6611432565b90506116c2828261167b565b919050565b600067ffffffffffffffff8211156116e2576116e161164c565b5b6116eb8261163b565b9050602081019050919050565b82818337600083830152505050565b600061171a611715846116c7565b6116ac565b90508281526020810184848401111561173657611735611636565b5b6117418482856116f8565b509392505050565b600082601f83011261175e5761175d611472565b5b813561176e848260208601611707565b91505092915050565b60006020828403121561178d5761178c61143c565b5b600082013567ffffffffffffffff8111156117ab576117aa611441565b5b6117b784828501611749565b91505092915050565b60008115159050919050565b6117d5816117c0565b82525050565b600081519050919050565b600082825260208201905092915050565b60005b838110156118155780820151818401526020810190506117fa565b60008484015250505050565b600061182c826117db565b61183681856117e6565b93506118468185602086016117f7565b61184f8161163b565b840191505092915050565b600060408201905061186f60008301856117cc565b81810360208301526118818184611821565b90509392505050565b611893816115fa565b811461189e57600080fd5b50565b6000813590506118b08161188a565b92915050565b6000602082840312156118cc576118cb61143c565b5b60006118da848285016118a1565b91505092915050565b6000819050919050565b60006119086119036118fe846115da565b6118e3565b6115da565b9050919050565b600061191a826118ed565b9050919050565b600061192c8261190f565b9050919050565b61193c81611921565b82525050565b60006020820190506119576000830184611933565b92915050565b6000602082840312156119735761197261143c565b5b60006119818482850161145d565b91505092915050565b600060408201905061199f600083018561160c565b6119ac602083018461160c565b9392505050565b60006060820190506119c86000830186611376565b6119d56020830185611376565b6119e26040830184611376565b949350505050565b6000819050919050565b6119fd816119ea565b82525050565b611a0c8161136c565b82525050565b600061ffff82169050919050565b611a2981611a12565b82525050565b600063ffffffff82169050919050565b611a4881611a2f565b82525050565b600082825260208201905092915050565b6000611a6a826117db565b611a748185611a4e565b9350611a848185602086016117f7565b611a8d8161163b565b840191505092915050565b600060c083016000830151611ab060008601826119f4565b506020830151611ac36020860182611a03565b506040830151611ad66040860182611a20565b506060830151611ae96060860182611a3f565b506080830151611afc6080860182611a3f565b5060a083015184820360a0860152611b148282611a5f565b9150508091505092915050565b60006020820190508181036000830152611b3b8184611a98565b905092915050565b600081519050611b5281611446565b92915050565b600060208284031215611b6e57611b6d61143c565b5b6000611b7c84828501611b43565b91505092915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b6000611bbf8261136c565b9150611bca8361136c565b9250828203905081811115611be257611be1611b85565b5b92915050565b600082825260208201905092915050565b7f4d7573742062652070726f706f736564206f776e657200000000000000000000600082015250565b6000611c2f601683611be8565b9150611c3a82611bf9565b602082019050919050565b60006020820190508181036000830152611c5e81611c22565b9050919050565b6000606082019050611c7a600083018661160c565b611c87602083018561160c565b611c94604083018461160c565b949350505050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052603260045260246000fd5b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601260045260246000fd5b6000611d058261136c565b9150611d108361136c565b925082611d2057611d1f611ccb565b5b828206905092915050565b600081905092915050565b50565b6000611d46600083611d2b565b9150611d5182611d36565b600082019050919050565b6000611d6782611d39565b9150819050919050565b611d7a816117c0565b82525050565b602082016000820151611d966000850182611d71565b50505050565b6000602082019050611db16000830184611d80565b92915050565b7f4f6e6c792063616c6c61626c65206279206f776e657200000000000000000000600082015250565b6000611ded601683611be8565b9150611df882611db7565b602082019050919050565b60006020820190508181036000830152611e1c81611de0565b9050919050565b7f43616e6e6f74207472616e7366657220746f2073656c66000000000000000000600082015250565b6000611e59601783611be8565b9150611e6482611e23565b602082019050919050565b60006020820190508181036000830152611e8881611e4c565b905091905056fea2646970667358221220035337bf6e5083eeb9025845775269022bd91bc79df3d1a478fff42f8677404d64736f6c634300081c0033",
+  "deployedBytecode": "0x6080604052600436106101095760003560e01c80636e04ff0d1161009557806391ad27b41161006457806391ad27b4146103155780639eccacf614610340578063e55ae4e81461036b578063f2fde38b146103a8578063fd6673f5146103d157610109565b80636e04ff0d1461026c57806379ba5097146102aa5780638da5cb5b146102c15780638ea98117146102ec57610109565b8063320229eb116100dc578063320229eb146101975780634585e33b146101c2578063473f1ddc146101eb57806353a2c19a146102165780635f1b0fd81461024157610109565b806309bc33a71461010e578063115cbaf5146101395780631fe543e3146101645780632cfcc5391461018d575b600080fd5b34801561011a57600080fd5b506101236103fc565b6040516101309190611385565b60405180910390f35b34801561014557600080fd5b5061014e610424565b60405161015b9190611417565b60405180910390f35b34801561017057600080fd5b5061018b600480360381019061018691906114d7565b61043b565b005b610195610501565b005b3480156101a357600080fd5b506101ac610670565b6040516101b99190611385565b60405180910390f35b3480156101ce57600080fd5b506101e960048036038101906101e4919061158d565b61067a565b005b3480156101f757600080fd5b506102006108ba565b60405161020d919061161b565b60405180910390f35b34801561022257600080fd5b5061022b6108e4565b6040516102389190611385565b60405180910390f35b34801561024d57600080fd5b506102566108f3565b6040516102639190611385565b60405180910390f35b34801561027857600080fd5b50610293600480360381019061028e9190611777565b610900565b6040516102a192919061185a565b60405180910390f35b3480156102b657600080fd5b506102bf6109e8565b005b3480156102cd57600080fd5b506102d6610b7d565b6040516102e3919061161b565b60405180910390f35b3480156102f857600080fd5b50610313600480360381019061030e91906118b6565b610ba6565b005b34801561032157600080fd5b5061032a610d87565b6040516103379190611385565b60405180910390f35b34801561034c57600080fd5b50610355610daf565b6040516103629190611942565b60405180910390f35b34801561037757600080fd5b50610392600480360381019061038d919061195d565b610dd5565b60405161039f919061161b565b60405180910390f35b3480156103b457600080fd5b506103cf60048036038101906103ca91906118b6565b610e1d565b005b3480156103dd57600080fd5b506103e6610e31565b6040516103f39190611385565b60405180910390f35b60007f0000000000000000000000000000000000000000000000000000000000000000905090565b6000600460149054906101000a900460ff16905090565b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146104f15733600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff166040517f1cf993f40000000000000000000000000000000000000000000000000000000081526004016104e892919061198a565b60405180910390fd5b6104fc838383610e3e565b505050565b7f000000000000000000000000000000000000000000000000000000000000000034101561055b576040517fbd4e069500000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6000600181111561056f5761056e6113a0565b5b600460149054906101000a900460ff166001811115610591576105906113a0565b5b146105c8576040517f1425571c00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6003339080600181540180825580915050600190039060005260206000200160009091909190916101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055503373ffffffffffffffffffffffffffffffffffffffff167f0805e1d667bddb8a95f0f09880cf94f403fb596ce79928d9f29b74203ba284d460405160405180910390a2565b6000600554905090565b600061069460405180602001604052806000815250610900565b509050806107035747600380549050600460149054906101000a900460ff1660018111156106c5576106c46113a0565b5b6040517f584327aa0000000000000000000000000000000000000000000000000000000081526004016106fa939291906119b3565b60405180910390fd5b6001600460146101000a81548160ff02191690836001811115610729576107286113a0565b5b02179055506000600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16639b1c385e6040518060c001604052807f000000000000000000000000000000000000000000000000000000000000000081526020017f00000000000000000000000000000000000000000000000000000000000000008152602001600361ffff1681526020017f000000000000000000000000000000000000000000000000000000000000000063ffffffff168152602001600163ffffffff168152602001610823604051806020016040528060001515815250611071565b8152506040518263ffffffff1660e01b81526004016108429190611b21565b6020604051808303816000875af1158015610861573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906108859190611b58565b9050807fcd6e45c8998311cab7e9d4385596cac867e20a0587194b954fa3a731c93ce78b60405160405180910390a250505050565b6000600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6000600163ffffffff16905090565b6000600361ffff16905090565b600060606000600460149054906101000a900460ff166001811115610928576109276113a0565b5b6000600181111561093c5761093b6113a0565b5b14905060007f0000000000000000000000000000000000000000000000000000000000000000600554426109709190611bb4565b119050600080600380549050119050600080471190508380156109905750825b80156109995750815b80156109a25750805b9550856040518060400160405280600381526020017f30783000000000000000000000000000000000000000000000000000000000008152509550955050505050915091565b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614610a78576040517f08c379a0000000000000000000000000000000000000000000000000000000008152600401610a6f90611c45565b60405180910390fd5b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff169050336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506000600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055503373ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a350565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b610bae610b7d565b73ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614158015610c375750600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614155b15610ca65733610c45610b7d565b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff166040517f061db9c1000000000000000000000000000000000000000000000000000000008152600401610c9d93929190611c65565b60405180910390fd5b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff1603610d0c576040517fd92e233d00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b80600260006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055507fd1a6a14209a385a964d036e404cb5cfb71f4000cdb03c9366292430787261be681604051610d7c919061161b565b60405180910390a150565b60007f0000000000000000000000000000000000000000000000000000000000000000905090565b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600060038281548110610deb57610dea611c9c565b5b9060005260206000200160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff169050919050565b610e25611109565b610e2e81611199565b50565b6000600380549050905090565b600060038054905083836000818110610e5a57610e59611c9c565b5b90506020020135610e6b9190611cfa565b9050600060038281548110610e8357610e82611c9c565b5b9060005260206000200160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905080600460006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550600067ffffffffffffffff811115610f0c57610f0b61164c565b5b604051908082528060200260200182016040528015610f3a5781602001602082028036833780820191505090505b5060039080519060200190610f509291906112c5565b506000600460146101000a81548160ff02191690836001811115610f7757610f766113a0565b5b02179055504260058190555060008173ffffffffffffffffffffffffffffffffffffffff1647604051610fa990611d5c565b60006040518083038185875af1925050503d8060008114610fe6576040519150601f19603f3d011682016040523d82523d6000602084013e610feb565b606091505b5050905080611026576040517fa1d04b3900000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b8173ffffffffffffffffffffffffffffffffffffffff167f5b690ec4a06fe979403046eaeea5b3ce38524683c3001f662c8b5a829632f7df60405160405180910390a2505050505050565b60607f92fd13387c7fe7befbc38d303d6468778fb9731bc4583f17d92989c6fcfdeaaa826040516024016110a59190611d9c565b604051602081830303815290604052907bffffffffffffffffffffffffffffffffffffffffffffffffffffffff19166020820180517bffffffffffffffffffffffffffffffffffffffffffffffffffffffff83818316178352505050509050919050565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614611197576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040161118e90611e03565b60405180910390fd5b565b3373ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff1603611207576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004016111fe90611e6f565b60405180910390fd5b80600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508073ffffffffffffffffffffffffffffffffffffffff1660008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167fed8889f560326eb138920d842192f0eb3dd22b4f139c87a2c57538e05bae127860405160405180910390a350565b82805482825590600052602060002090810192821561133e579160200282015b8281111561133d5782518260006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550916020019190600101906112e5565b5b50905061134b919061134f565b5090565b5b80821115611368576000816000905550600101611350565b5090565b6000819050919050565b61137f8161136c565b82525050565b600060208201905061139a6000830184611376565b92915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052602160045260246000fd5b600281106113e0576113df6113a0565b5b50565b60008190506113f1826113cf565b919050565b6000611401826113e3565b9050919050565b611411816113f6565b82525050565b600060208201905061142c6000830184611408565b92915050565b6000604051905090565b600080fd5b600080fd5b61144f8161136c565b811461145a57600080fd5b50565b60008135905061146c81611446565b92915050565b600080fd5b600080fd5b600080fd5b60008083601f84011261149757611496611472565b5b8235905067ffffffffffffffff8111156114b4576114b3611477565b5b6020830191508360208202830111156114d0576114cf61147c565b5b9250929050565b6000806000604084860312156114f0576114ef61143c565b5b60006114fe8682870161145d565b935050602084013567ffffffffffffffff81111561151f5761151e611441565b5b61152b86828701611481565b92509250509250925092565b60008083601f84011261154d5761154c611472565b5b8235905067ffffffffffffffff81111561156a57611569611477565b5b6020830191508360018202830111156115865761158561147c565b5b9250929050565b600080602083850312156115a4576115a361143c565b5b600083013567ffffffffffffffff8111156115c2576115c1611441565b5b6115ce85828601611537565b92509250509250929050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b6000611605826115da565b9050919050565b611615816115fa565b82525050565b6000602082019050611630600083018461160c565b92915050565b600080fd5b6000601f19601f8301169050919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b6116848261163b565b810181811067ffffffffffffffff821117156116a3576116a261164c565b5b80604052505050565b60006116b6611432565b90506116c2828261167b565b919050565b600067ffffffffffffffff8211156116e2576116e161164c565b5b6116eb8261163b565b9050602081019050919050565b82818337600083830152505050565b600061171a611715846116c7565b6116ac565b90508281526020810184848401111561173657611735611636565b5b6117418482856116f8565b509392505050565b600082601f83011261175e5761175d611472565b5b813561176e848260208601611707565b91505092915050565b60006020828403121561178d5761178c61143c565b5b600082013567ffffffffffffffff8111156117ab576117aa611441565b5b6117b784828501611749565b91505092915050565b60008115159050919050565b6117d5816117c0565b82525050565b600081519050919050565b600082825260208201905092915050565b60005b838110156118155780820151818401526020810190506117fa565b60008484015250505050565b600061182c826117db565b61183681856117e6565b93506118468185602086016117f7565b61184f8161163b565b840191505092915050565b600060408201905061186f60008301856117cc565b81810360208301526118818184611821565b90509392505050565b611893816115fa565b811461189e57600080fd5b50565b6000813590506118b08161188a565b92915050565b6000602082840312156118cc576118cb61143c565b5b60006118da848285016118a1565b91505092915050565b6000819050919050565b60006119086119036118fe846115da565b6118e3565b6115da565b9050919050565b600061191a826118ed565b9050919050565b600061192c8261190f565b9050919050565b61193c81611921565b82525050565b60006020820190506119576000830184611933565b92915050565b6000602082840312156119735761197261143c565b5b60006119818482850161145d565b91505092915050565b600060408201905061199f600083018561160c565b6119ac602083018461160c565b9392505050565b60006060820190506119c86000830186611376565b6119d56020830185611376565b6119e26040830184611376565b949350505050565b6000819050919050565b6119fd816119ea565b82525050565b611a0c8161136c565b82525050565b600061ffff82169050919050565b611a2981611a12565b82525050565b600063ffffffff82169050919050565b611a4881611a2f565b82525050565b600082825260208201905092915050565b6000611a6a826117db565b611a748185611a4e565b9350611a848185602086016117f7565b611a8d8161163b565b840191505092915050565b600060c083016000830151611ab060008601826119f4565b506020830151611ac36020860182611a03565b506040830151611ad66040860182611a20565b506060830151611ae96060860182611a3f565b506080830151611afc6080860182611a3f565b5060a083015184820360a0860152611b148282611a5f565b9150508091505092915050565b60006020820190508181036000830152611b3b8184611a98565b905092915050565b600081519050611b5281611446565b92915050565b600060208284031215611b6e57611b6d61143c565b5b6000611b7c84828501611b43565b91505092915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b6000611bbf8261136c565b9150611bca8361136c565b9250828203905081811115611be257611be1611b85565b5b92915050565b600082825260208201905092915050565b7f4d7573742062652070726f706f736564206f776e657200000000000000000000600082015250565b6000611c2f601683611be8565b9150611c3a82611bf9565b602082019050919050565b60006020820190508181036000830152611c5e81611c22565b9050919050565b6000606082019050611c7a600083018661160c565b611c87602083018561160c565b611c94604083018461160c565b949350505050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052603260045260246000fd5b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601260045260246000fd5b6000611d058261136c565b9150611d108361136c565b925082611d2057611d1f611ccb565b5b828206905092915050565b600081905092915050565b50565b6000611d46600083611d2b565b9150611d5182611d36565b600082019050919050565b6000611d6782611d39565b9150819050919050565b611d7a816117c0565b82525050565b602082016000820151611d966000850182611d71565b50505050565b6000602082019050611db16000830184611d80565b92915050565b7f4f6e6c792063616c6c61626c65206279206f776e657200000000000000000000600082015250565b6000611ded601683611be8565b9150611df882611db7565b602082019050919050565b60006020820190508181036000830152611e1c81611de0565b9050919050565b7f43616e6e6f74207472616e7366657220746f2073656c66000000000000000000600082015250565b6000611e59601783611be8565b9150611e6482611e23565b602082019050919050565b60006020820190508181036000830152611e8881611e4c565b905091905056fea2646970667358221220035337bf6e5083eeb9025845775269022bd91bc79df3d1a478fff42f8677404d64736f6c634300081c0033",
+  "devdoc": {
+    "author": "Rangga Yovie (Following Patrick Collins)",
+    "details": "Implements Chainlink VRF v2",
+    "kind": "dev",
+    "methods": {
+      "checkUpkeep(bytes)": {
+        "details": "checkUpkeep adalah fungsi yang dipanggil oleh Chainlink Node (Off-chain). Node akan bertanya: \"Apakah sudah waktunya undian dijalankan?\" Syarat True: 1. Waktu sudah lewat (time passed) 2. Ada setidaknya 1 pemain & ada saldo ETH 3. Status undian sedang OPEN"
+      },
+      "performUpkeep(bytes)": {
+        "details": "performUpkeep adalah fungsi yang dijalankan kalau checkUpkeep = TRUE.  Ini otomatis request angka acak"
+      }
+    },
+    "title": "A sample Raffle Contract",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "acceptOwnership()": {
+        "notice": "Allows an ownership transfer to be completed by the recipient."
+      },
+      "owner()": {
+        "notice": "Get the current owner"
+      },
+      "setCoordinator(address)": {
+        "notice": "Sets the VRF Coordinator addressThis method should only be callable by the coordinator or contract owner"
+      },
+      "transferOwnership(address)": {
+        "notice": "Allows an owner to begin transferring ownership to a new address."
+      }
+    },
+    "notice": "This contract is for creating an untamperable decentralized smart contract",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 48,
+        "contract": "contracts/Raffle.sol:Raffle",
+        "label": "s_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 50,
+        "contract": "contracts/Raffle.sol:Raffle",
+        "label": "s_pendingOwner",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_address"
+      },
+      {
+        "astId": 308,
+        "contract": "contracts/Raffle.sol:Raffle",
+        "label": "s_vrfCoordinator",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_contract(IVRFCoordinatorV2Plus)457"
+      },
+      {
+        "astId": 733,
+        "contract": "contracts/Raffle.sol:Raffle",
+        "label": "s_players",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_array(t_address_payable)dyn_storage"
+      },
+      {
+        "astId": 747,
+        "contract": "contracts/Raffle.sol:Raffle",
+        "label": "s_recentWinner",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_address"
+      },
+      {
+        "astId": 750,
+        "contract": "contracts/Raffle.sol:Raffle",
+        "label": "s_raffleState",
+        "offset": 20,
+        "slot": "4",
+        "type": "t_enum(RaffleState)728"
+      },
+      {
+        "astId": 752,
+        "contract": "contracts/Raffle.sol:Raffle",
+        "label": "s_lastTimeStamp",
+        "offset": 0,
+        "slot": "5",
+        "type": "t_uint256"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_address_payable": {
+        "encoding": "inplace",
+        "label": "address payable",
+        "numberOfBytes": "20"
+      },
+      "t_array(t_address_payable)dyn_storage": {
+        "base": "t_address_payable",
+        "encoding": "dynamic_array",
+        "label": "address payable[]",
+        "numberOfBytes": "32"
+      },
+      "t_contract(IVRFCoordinatorV2Plus)457": {
+        "encoding": "inplace",
+        "label": "contract IVRFCoordinatorV2Plus",
+        "numberOfBytes": "20"
+      },
+      "t_enum(RaffleState)728": {
+        "encoding": "inplace",
+        "label": "enum Raffle.RaffleState",
+        "numberOfBytes": "1"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
